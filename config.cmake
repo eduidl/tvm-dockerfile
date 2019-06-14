@@ -1,0 +1,7 @@
+set(USE_LLVM llvm-config-6.0)
+set(USE_CUDA ON)
+set(USE_CUDNN ON)
+set(USE_RPC ON)
+set(USE_SORT ON)
+set(USE_GRAPH_RUNTIME ON)
+set(USE_BLAS openblas)
