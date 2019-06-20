@@ -1,36 +1,42 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
-    curl \
     git \
     libopenblas-dev \
     llvm-6.0-dev \
-    python3-dev \
-    python3-tk \
+    wget \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl https://bootstrap.pypa.io/get-pip.py | python3
-RUN pip3 install \
+ENV MINICONDA Miniconda3-latest-Linux-x86_64.sh
+ENV PATH /opt/conda/bin:${PATH}
+
+RUN wget -q https://repo.continuum.io/miniconda/$MINICONDA \
+ && bash $MINICONDA -b -p /opt/conda \
+ && rm $MINICONDA \
+ && conda update -n base -c defaults conda
+RUN conda install -y \
     attrs \
     cython \
     decorator \
-    gluoncv \
     matplotlib \
     mxnet \
     numpy \
-    onnx \
     pillow \
     psutil \
     tornado \
-    xgboost
+ && pip install \
+    gluoncv \
+    onnx \
+    xgboost \
+ && rm -rf /opt/conda/pkgs/*
 
-ENV TVM_PATH=/workspace/tvm
-ENV PYTHONPATH=${TVM_PATH}/python:${TVM_PATH}/topi/python:${TVM_PATH}/nnvm/python:${TVM_PATH}/vta/python:${PYTHONPATH}
-ENV PATH=/usr/local/cuda/bin:${PATH}
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
+ENV TVM_PATH /workspace/tvm
+ENV PATH /usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:${LD_LIBRARY_PATH}
+ENV PYTHONPATH ${TVM_PATH}/python:${TVM_PATH}/topi/python:${TVM_PATH}/nnvm/python:${TVM_PATH}/vta/python:${PYTHONPATH}
 
 WORKDIR /workspace
