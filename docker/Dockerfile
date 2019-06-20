@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     git \
     libopenblas-dev \
+    libopencv-dev \
     llvm-6.0-dev \
     wget \
  && rm -rf /var/lib/apt/lists/*
@@ -31,6 +32,7 @@ RUN conda install -y \
  && pip install \
     gluoncv \
     onnx \
+    opencv-python \
     xgboost \
  && rm -rf /opt/conda/pkgs/*
 
