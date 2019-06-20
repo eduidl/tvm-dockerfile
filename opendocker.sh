@@ -10,7 +10,7 @@ fi
 nvidia-docker run -it --rm \
   --net host \
   -e DISPLAY=$DISPLAY \
-  -v `pwd`:/workspace \
+  -v `pwd`/tvm:/workspace/tvm \
   -v $HOME/.Xauthority:/root/.Xauthority:ro \
   $1 \
   bash

@@ -41,4 +41,4 @@ ENV PATH /usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 ENV PYTHONPATH ${TVM_PATH}/python:${TVM_PATH}/topi/python:${TVM_PATH}/nnvm/python:${TVM_PATH}/vta/python:${PYTHONPATH}
 
-WORKDIR /workspace
+WORKDIR /workspace/tvm

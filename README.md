@@ -9,6 +9,7 @@ $ cp config.cmake ./tvm
 $ docker build -t tvm docker
 $ ./opendocker.sh tvm
 ##### in docker container #####
+$ mkdir build
 $ cd build
 $ cmake ../tvm
 $ make
