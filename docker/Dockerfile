@@ -18,7 +18,8 @@ ENV PATH /opt/conda/bin:${PATH}
 RUN wget -q https://repo.continuum.io/miniconda/$MINICONDA \
  && bash $MINICONDA -b -p /opt/conda \
  && rm $MINICONDA \
- && conda update -n base -c defaults conda
+ && conda install -y python=3.6 \
+ && conda update conda
 RUN conda install -y \
     attrs \
     cython \
