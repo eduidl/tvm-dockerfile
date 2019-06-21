@@ -35,6 +35,8 @@ RUN conda install -y \
     onnx \
     opencv-python \
     xgboost \
+ && pip install --pre \
+    mxnet-mkl \
  && rm -rf /opt/conda/pkgs/*
 
 ENV TVM_PATH /workspace/tvm
